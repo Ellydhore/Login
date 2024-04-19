@@ -21,6 +21,10 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class HelloApplication extends Application {
     @Override
@@ -105,14 +109,36 @@ public class HelloApplication extends Application {
         btnLogin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Hello");
-                try {
-                    Parent p = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-                    Scene s = new Scene(p);
-                    stage.setScene(s);
-                    stage.show();
+                try(Connection connection = MySQLConnector.getConnection();
+                    PreparedStatement preparedStatement = connection.prepareStatement("Select password FROM account WHERE user=?")) {
+                    preparedStatement.setString(1, "user");
+                    ResultSet resultSet = preparedStatement.executeQuery();
+
+                    if(!resultSet.isBeforeFirst()) {
+                        System.out.println("User not found in the database!");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("Provided credentials are incorrect!");
+                        alert.show();
+                    } else {
+                        while(resultSet.next()) {
+                            String retrievedPassword = resultSet.getString("password");
+                            if(retrievedPassword.equals(pfPassword.getText())) {
+                                Parent p = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+                                Scene s = new Scene(p);
+                                stage.setScene(s);
+                                stage.show();
+                            } else {
+                                System.out.println("Password did not match!");
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setContentText("Provided credentials are incorrect!");
+                                alert.show();
+                            }
+                        }
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         });

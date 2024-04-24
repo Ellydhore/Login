@@ -1,0 +1,38 @@
+.background {
+    -fx-background-color: linear-gradient(to bottom right, rgba(223, 255, 0,1), rgba(228, 158, 10,1));
+}
+
+.transparent_background {
+    -fx-background-color: transparent;
+}
+
+.text_background {
+    -fx-background-color: linear-gradient(to top, rgba(8, 143, 143), rgba(0, 255, 255));
+    -fx-prompt-text-fill: rgba(0, 0, 0);
+}
+
+.table-view .table-cell{
+    -fx-font-weight:bold;
+    -fx-font-size:20px;
+}
+
+.table-view .column-header{
+     -fx-font-weight:bold;
+     -fx-font-size:20px;
+}
+
+.text_color1 {
+    -fx-fill: linear-gradient(to top, rgba(215, 0, 64), rgba(222, 49, 99));
+}
+
+.button_background {
+    -fx-background-color: linear-gradient(to top, rgba(8, 143, 143), rgba(0, 255, 255));
+}
+
+.button_background2 {
+    -fx-background-color: linear-gradient(to top, rgba(215, 0, 64), rgba(222, 49, 99));
+}
+
+.transparent_button {
+    -fx-background-color: rgba(0, 0, 0, 0);
+}

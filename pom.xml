@@ -38,12 +38,14 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
+            <version>8.0.33</version>
         </dependency>
+
 
     </dependencies>
 
@@ -67,7 +69,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.csit228_f1_v2/com.example.csit228_f1_v2.HelloApplication</mainClass>
+                            <mainClass>com.example.csit228_f1_v2/com.example.csit228_f1_v2.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
